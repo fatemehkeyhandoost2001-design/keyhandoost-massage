@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>سامانه پیام کیهان دوست</title>
+    <link rel="stylesheet" href="styles.css?v=20260910-2">
+</head>
+<body>
+    <main class="page">
+        <div class="brand-mark">
+            <div class="brand-icon">✉</div>
+            <div>
+                <div class="brand-name">کیهان‌دوست</div>
+                <div class="brand-subtitle">سامانه مکاتبات الکترونیکی</div>
+            </div>
+        </div>
+        <section id="loginView" class="card login-card">
+            <div class="auth-hero">
+                <span class="eyebrow">سامانه نامه‌نگاری</span>
+                <h1>خوش آمدید</h1>
+                <p class="hint" id="authHint">برای ورود از حساب کاربری خود استفاده کنید.</p>
+            </div>
+
+            <form id="loginForm">
+                <label for="username">نام کاربری</label>
+                <input id="username" name="username" autocomplete="username" required minlength="3">
+
+                <label for="password">رمز عبور</label>
+                <input id="password" name="password" type="password" autocomplete="current-password" required>
+
+                <button type="submit">ورود</button>
+            </form>
+
+            <form id="registerForm" class="hidden">
+                <label for="registerFullName">نام و نام خانوادگی</label>
+                <input id="registerFullName" name="full_name" autocomplete="name" required minlength="2" maxlength="100">
+
+                <label for="registerUsername">نام کاربری</label>
+                <input id="registerUsername" name="username" autocomplete="username" required minlength="3" maxlength="50" pattern="[A-Za-z0-9_]+">
+
+                <label for="registerPassword">رمز عبور</label>
+                <input id="registerPassword" name="password" type="password" autocomplete="new-password" required minlength="6" maxlength="100">
+
+                <label for="registerPasswordConfirm">تکرار رمز عبور</label>
+                <input id="registerPasswordConfirm" name="password_confirm" type="password" autocomplete="new-password" required minlength="6" maxlength="100">
+
+                <button type="submit">ثبت نام</button>
+            </form>
+
+            <button id="authSwitchButton" class="secondary auth-switch" type="button">ثبت نام کاربر جدید</button>
+
+            <div id="demoUsers" class="demo-users"><strong>حساب‌های نمونه</strong>
+                <span>ali / 123456</span>
+                <span>sara / 123456</span>
+                <span>reza / 123456</span>
+            </div>
+            <p id="loginMessage" class="message"></p>
+        </section>
+
+        <section id="appView" class="card app-card hidden">
+            <header class="app-header">
+                <div>
+                    <h1>کارتابل نامه‌ها</h1>
+                    <p>کاربر: <strong id="currentUserName"></strong></p>
+                </div>
+                <button id="logoutButton" class="secondary" type="button">خروج</button>
+            </header>
+
+            <nav class="tabs">
+                <button class="tab active" data-view="inbox" type="button">دریافتی</button>
+                <button class="tab" data-view="sent" type="button">ارسالی</button>
+                <button class="tab" data-view="compose" type="button">نامه جدید</button>
+            </nav>
+
+            <section id="inboxPanel" class="panel">
+                <div class="panel-head">
+                    <h2>نامه‌های دریافتی</h2>
+                    <button class="secondary" data-refresh="inbox" type="button">به‌روزرسانی</button>
+                </div>
+                <div id="inboxList" class="letter-list"></div>
+            </section>
+
+            <section id="sentPanel" class="panel hidden">
+                <div class="panel-head">
+                    <h2>نامه‌های ارسال‌شده</h2>
+                    <button class="secondary" data-refresh="sent" type="button">به‌روزرسانی</button>
+                </div>
+                <div id="sentList" class="letter-list"></div>
+            </section>
+
+            <section id="composePanel" class="panel hidden">
+                <h2>ارسال نامه</h2>
+                <form id="letterForm">
+                    <label for="receiverId">گیرنده</label>
+                    <select id="receiverId" name="receiver_id" required></select>
+
+                    <label for="subject">موضوع</label>
+                    <input id="subject" name="subject" required minlength="3" maxlength="200">
+
+                    <label for="body">متن نامه</label>
+                    <textarea id="body" name="body" rows="8" required maxlength="5000"></textarea>
+
+                    <label for="attachment">پیوست اختیاری</label>
+                    <input id="attachment" name="attachment" type="file" accept=".pdf,.png,.jpg,.jpeg,.txt,.doc,.docx,.zip">
+
+                    <button type="submit">ارسال نامه</button>
+                </form>
+                <p id="composeMessage" class="message"></p>
+            </section>
+        </section>
+    </main>
+
+    <dialog id="letterDialog">
+        <div class="dialog-content">
+            <button id="closeDialogButton" class="close-button" type="button">×</button>
+            <small id="dialogDirection"></small>
+            <h2 id="dialogSubject"></h2>
+            <p id="dialogMeta" class="dialog-meta"></p>
+            <p id="dialogBody" class="letter-body"></p>
+            <button id="downloadButton" class="hidden" type="button"></button>
+        </div>
+    </dialog>
+
+    <script src="app.js?v=20260910-2"></script>
+</body>
+</html>
